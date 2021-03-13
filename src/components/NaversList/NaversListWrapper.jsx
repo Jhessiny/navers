@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import NaverItem from "./NaverItem";
 import "./NaversListWrapper.scss";
 
-function NaversListWrapper({ navers }) {
+function NaversListWrapper() {
+  const [navers, setNavers] = useState([]);
+  const getNavers = async () => {
+    const res = await axios.get("https://navedex-api.herokuapp.com/v1/navers", {
+      headers: {
+        authorization:
+          "Bearer " +
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+      },
+    });
+    setNavers(res.data);
+    console.log(res);
+  };
+
+  useEffect(() => {
+    getNavers();
+  }, []);
+
   console.log(navers);
   return (
     <div className="navers-list-wrapper">
@@ -12,7 +30,7 @@ function NaversListWrapper({ navers }) {
       </div>
       <div className="navers-list-wrapper__list">
         {navers.map((naver) => (
-          <NaverItem naver={naver} />
+          <NaverItem naver={naver} key={naver.id} />
         ))}
       </div>
     </div>
