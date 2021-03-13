@@ -1,0 +1,28 @@
+.navers-list-wrapper {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 4rem;
+      color: #6600ca;
+    }
+    button {
+      background-color: #6600ca;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 3rem;
+      font-weight: bold;
+      border-radius: 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+    flex-wrap: wrap;
+  }
+}
