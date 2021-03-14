@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./NaverItem.scss";
 
 function NaverItem({ naver, getNaver, toggleModal, navers }) {
+  const [userImage, setUserImage] = useState(naver.url);
   const handleDelete = (id) => {
     console.log(id);
     toggleModal("deleteNaver", id);
   };
+
   return (
     <div
       className="naver-item"
@@ -21,7 +23,12 @@ function NaverItem({ naver, getNaver, toggleModal, navers }) {
           getNaver(naver.id);
         }}
       >
-        <img src={naver.url} alt="" className="naver-item__img" />
+        <img
+          src={userImage}
+          onError={() => setUserImage("assets/images/naver.jpg")}
+          alt="User"
+          className="naver-item__img"
+        />
         <h2 className="naver-item__name">{naver.name}</h2>
         <p>{naver.job_role}</p>
       </Link>
