@@ -1,9 +1,11 @@
 import axios from "axios";
 import { formatDate } from "../utils/commonFunctions";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SuccessModalContent from "../components/ModalContents/SuccessModalContent";
 import NaverForm from "../components/NaverForm";
 import Modal from "../components/UI/Modal";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router";
 
 function CreateNaver(props) {
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -15,6 +17,13 @@ function CreateNaver(props) {
     birthdate: "",
     url: "",
   });
+
+  const [loggedToken] = useContext(UserContext);
+  let redirect;
+
+  if (!loggedToken) {
+    redirect = <Redirect to="/login" />;
+  }
 
   const changeInput = (e) => {
     let inputValue = e.target.value;
@@ -36,9 +45,7 @@ function CreateNaver(props) {
       .post("https://navedex-api.herokuapp.com/v1/navers", addUserForm, {
         headers: {
           "Content-Type": "application/json",
-          authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+          authorization: "Bearer " + loggedToken,
         },
       })
       .then(() => {
@@ -53,6 +60,7 @@ function CreateNaver(props) {
 
   return (
     <>
+      {redirect}
       <NaverForm
         title="Adicionar Naver"
         changeHandler={(e) => changeInput(e)}

@@ -1,9 +1,11 @@
 import axios from "axios";
 import { formatDate } from "../utils/commonFunctions";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SuccessModalContent from "../components/ModalContents/SuccessModalContent";
 import NaverForm from "../components/NaverForm";
 import Modal from "../components/UI/Modal";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router";
 
 const EditNaver = ({ match, history }) => {
   const [userId, setUserId] = useState(null);
@@ -16,15 +18,19 @@ const EditNaver = ({ match, history }) => {
     birthdate: "",
     url: "",
   });
+  const [loggedToken] = useContext(UserContext);
+  let redirect;
+
+  if (!loggedToken) {
+    redirect = <Redirect to="/login" />;
+  }
 
   const getUser = async (id) => {
     const res = await axios.get(
       "https://navedex-api.herokuapp.com/v1/navers/" + id,
       {
         headers: {
-          authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+          authorization: "Bearer " + loggedToken,
         },
       }
     );
@@ -69,9 +75,7 @@ const EditNaver = ({ match, history }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            authorization:
-              "Bearer " +
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+            authorization: "Bearer " + loggedToken,
           },
         }
       )
@@ -87,6 +91,7 @@ const EditNaver = ({ match, history }) => {
 
   return (
     <>
+      {redirect}
       <NaverForm
         title="Editar Naver"
         changeHandler={(e) => changeInput(e)}

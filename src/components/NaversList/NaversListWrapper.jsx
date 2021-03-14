@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import NaverItem from "./NaverItem";
 import "./NaversListWrapper.scss";
@@ -8,6 +8,7 @@ import SuccessModalContent from "../ModalContents/SuccessModalContent";
 import DeletingModalContent from "../ModalContents/DeletingModalContent";
 import { Link } from "react-router-dom";
 import Spinner from "../UI/Spinner";
+import { UserContext } from "../../UserContext";
 
 function NaversListWrapper() {
   const [navers, setNavers] = useState([]);
@@ -17,14 +18,13 @@ function NaversListWrapper() {
   const [deletingUserId, setDeletingUserId] = useState(null);
   const [confirmedAction, setConfirmedAction] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [loggedToken] = useContext(UserContext);
 
   const getNavers = async () => {
     setIsFetching(true);
     const res = await axios.get("https://navedex-api.herokuapp.com/v1/navers", {
       headers: {
-        authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+        authorization: "Bearer " + loggedToken,
       },
     });
     setNavers(res.data);
@@ -41,9 +41,7 @@ function NaversListWrapper() {
       "https://navedex-api.herokuapp.com/v1/navers/" + id,
       {
         headers: {
-          authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+          authorization: "Bearer " + loggedToken,
         },
       }
     );
@@ -60,9 +58,7 @@ function NaversListWrapper() {
   const deleteNaver = async (id) => {
     await axios.delete("https://navedex-api.herokuapp.com/v1/navers/" + id, {
       headers: {
-        authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
+        authorization: "Bearer " + loggedToken,
       },
     });
     toggleModal("success", null, "excluído");
