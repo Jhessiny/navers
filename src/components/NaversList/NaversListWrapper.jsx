@@ -62,7 +62,7 @@ function NaversListWrapper() {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzBkMzBlLWUxYjMtNGFkNC04NmE0LWVmMGQyOGRkYjViMiIsImVtYWlsIjoiamhlc3NpbnltYXR0b3NAZ21haWwuY29tIiwiaWF0IjoxNjE1NjY5OTE2fQ.YEQ12Ljqqo7Xc5lNrvC6ebXD08VGM2ySzw4OLfmH4jg",
       },
     });
-    toggleModal("confirmation", null, "excluído");
+    toggleModal("success", null, "excluído");
     getNavers();
   };
 
@@ -79,6 +79,7 @@ function NaversListWrapper() {
     }
     if (content === "success") {
       setConfirmedAction(actionType);
+      console.log(actionType);
     }
   };
 

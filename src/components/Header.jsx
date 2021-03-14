@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="the-header">
       <img className="the-header__logo" src={logo} alt="" />
-      <a className="the-header__logout" href="#">
+      <a className="the-header__logout" href="/">
         Sair
       </a>
     </header>
