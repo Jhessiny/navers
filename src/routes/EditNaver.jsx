@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import SuccessModalContent from "../components/ModalContents/SuccessModalContent";
 import NaverForm from "../components/NaverForm";
+import Modal from "../components/UI/Modal";
 
 const EditNaver = ({ match, history }) => {
   const [userId, setUserId] = useState(null);
+  const [isShowingModal, setIsShowingModal] = useState(false);
   const [editFormData, setEditForm] = useState({
     name: "",
     admission_date: "",
@@ -105,17 +108,34 @@ const EditNaver = ({ match, history }) => {
           },
         }
       )
-      .then(() => history.push("/"));
+      .then(() => {
+        toggleModal();
+        setTimeout(() => history.push("/"), 1000);
+      });
+  };
+
+  const toggleModal = () => {
+    setIsShowingModal(!isShowingModal);
   };
 
   return (
-    <NaverForm
-      title="Editar Naver"
-      changeHandler={(e) => changeInput(e)}
-      clickHandler={saveChanges}
-      formData={editFormData}
-      formType={"new"}
-    />
+    <>
+      <NaverForm
+        title="Editar Naver"
+        changeHandler={(e) => changeInput(e)}
+        clickHandler={saveChanges}
+        formData={editFormData}
+        formType={"new"}
+      />
+      {isShowingModal && (
+        <Modal toggleModal={toggleModal} modalContent="" currentNaver="">
+          <SuccessModalContent
+            confirmationType="atualizado"
+            toggleModal={toggleModal}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 
