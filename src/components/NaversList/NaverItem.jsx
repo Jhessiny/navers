@@ -33,7 +33,9 @@ function NaverItem({ naver, getNaver, toggleModal, navers }) {
           <i className="fas fa-trash"></i>
         </button>
         <button className="btn btn-edit">
-          <i className="fas fa-pen"></i>
+          <Link to={"/edit-naver/" + naver.id}>
+            <i className="fas fa-pen"></i>
+          </Link>
         </button>
       </div>
     </div>

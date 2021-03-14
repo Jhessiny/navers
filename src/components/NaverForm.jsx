@@ -36,7 +36,7 @@ const NaverForm = ({
               type="date"
               name="birthdate"
               placeholder="Data de nascimento"
-              value={formData.birhtdate}
+              value={formData.birthdate}
               onChange={changeHandler}
             />
           </div>

@@ -14,7 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/create-naver" component={CreateNaver} />
-          <Route path="/edit-naver" component={EditNaver} />
+          <Route path="/edit-naver/:id" component={EditNaver} />
           <Route path="/login" component={Login} />
         </Switch>
       </div>
