@@ -22,6 +22,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="name">Nome</label>
             <input
+              required
               type="text"
               name="name"
               id=""
@@ -33,6 +34,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="birthday">Data de nascimento</label>
             <input
+              required
               type="date"
               name="birthdate"
               placeholder="Data de nascimento"
@@ -43,6 +45,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="projects">Projetos que participou</label>
             <input
+              required
               type="text"
               name="project"
               placeholder="Projectos que participou"
@@ -55,6 +58,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="">Cargo</label>
             <input
+              required
               type="text"
               name="job_role"
               placeholder="Cargo"
@@ -65,6 +69,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="admission">Tempo na empresa</label>
             <input
+              required
               type="date"
               name="admission_date"
               placeholder="Tempo na empresa"
@@ -75,6 +80,7 @@ const NaverForm = ({
           <div className="input-wrapper">
             <label htmlFor="">Url da foto do Naver</label>
             <input
+              required
               type="text"
               name="url"
               placeholder="Url da foto do Naver"

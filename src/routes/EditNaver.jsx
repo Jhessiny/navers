@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatDate } from "../utils/commonFunctions";
 import React, { useEffect, useState } from "react";
 import SuccessModalContent from "../components/ModalContents/SuccessModalContent";
 import NaverForm from "../components/NaverForm";
@@ -17,7 +18,6 @@ const EditNaver = ({ match, history }) => {
   });
 
   const getUser = async (id) => {
-    console.log("oi");
     const res = await axios.get(
       "https://navedex-api.herokuapp.com/v1/navers/" + id,
       {
@@ -28,33 +28,17 @@ const EditNaver = ({ match, history }) => {
         },
       }
     );
-
-    let birthdate = new Date(res.data.birthdate);
-    res.data.birthdate =
-      birthdate.getFullYear() +
-      "-" +
-      0 +
-      (birthdate.getMonth() + 1) +
-      "-" +
-      birthdate.getDate();
-    let admission = new Date(res.data.admission_date);
-    res.data.admission_date =
-      admission.getFullYear() +
-      "-" +
-      0 +
-      (admission.getMonth() + 1) +
-      "-" +
-      admission.getDate();
+    let birthdate = formatDate(res.data.birthdate, "geting");
+    let admission_date = formatDate(res.data.admission_date, "geting");
     setEditForm({
       name: res.data.name,
-      admission_date: res.data.admission_date,
+      admission_date: admission_date,
       job_role: res.data.job_role,
       project: res.data.project,
-      birthdate: res.data.birthdate,
+      birthdate: birthdate,
       url: res.data.url,
     });
   };
-  console.log(editFormData);
 
   useEffect(() => {
     let id = match.params.id;
@@ -65,36 +49,19 @@ const EditNaver = ({ match, history }) => {
   const changeInput = (e) => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
-    if (e.target.type === "date") {
-      let data = new Date(inputValue);
-      inputValue =
-        data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
-    }
     setEditForm((prevState) => {
       return { ...prevState, [inputName]: inputValue };
     });
   };
 
   const saveChanges = (e) => {
-    let birthdate = new Date(editFormData.birthdate);
-    editFormData.birthdate =
-      birthdate.getDate() +
-      "/" +
-      0 +
-      (birthdate.getMonth() + 1) +
-      "/" +
-      birthdate.getFullYear();
-    let admission = new Date(editFormData.admission_date);
-    editFormData.admission_date =
-      admission.getDate() +
-      "/" +
-      0 +
-      (admission.getMonth() + 1) +
-      "/" +
-      admission.getFullYear();
-    console.log("updateing ", userId);
-    console.log("editing", editFormData);
     e.preventDefault();
+    console.log("sending");
+    editFormData.admission_date = formatDate(
+      editFormData.admission_date,
+      "sending"
+    );
+    editFormData.birthdate = formatDate(editFormData.birthdate, "sending");
     axios
       .put(
         "https://navedex-api.herokuapp.com/v1/navers/" + userId,

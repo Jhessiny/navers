@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatDate } from "../utils/commonFunctions";
 import React, { useState } from "react";
 import SuccessModalContent from "../components/ModalContents/SuccessModalContent";
 import NaverForm from "../components/NaverForm";
@@ -18,11 +19,6 @@ function CreateNaver(props) {
   const changeInput = (e) => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
-    if (e.target.type === "date") {
-      let data = new Date(inputValue);
-      inputValue =
-        data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
-    }
     setAddUserForm((prevState) => {
       return { ...prevState, [inputName]: inputValue };
     });
@@ -30,6 +26,12 @@ function CreateNaver(props) {
 
   const addUser = (e) => {
     e.preventDefault();
+    addUserForm.admission_date = formatDate(
+      addUserForm.admission_date,
+      "sending"
+    );
+    addUserForm.birthdate = formatDate(addUserForm.birthdate, "sending");
+    console.log(addUserForm);
     axios
       .post("https://navedex-api.herokuapp.com/v1/navers", addUserForm, {
         headers: {

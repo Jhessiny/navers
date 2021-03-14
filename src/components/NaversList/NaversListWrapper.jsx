@@ -7,6 +7,7 @@ import NaverModalContent from "../ModalContents/NaverModalContent";
 import SuccessModalContent from "../ModalContents/SuccessModalContent";
 import DeletingModalContent from "../ModalContents/DeletingModalContent";
 import { Link } from "react-router-dom";
+import Spinner from "../UI/Spinner";
 
 function NaversListWrapper() {
   const [navers, setNavers] = useState([]);
@@ -15,7 +16,10 @@ function NaversListWrapper() {
   const [isShowingModal, setIsShowingModal] = useState(false);
   const [deletingUserId, setDeletingUserId] = useState(null);
   const [confirmedAction, setConfirmedAction] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+
   const getNavers = async () => {
+    setIsFetching(true);
     const res = await axios.get("https://navedex-api.herokuapp.com/v1/navers", {
       headers: {
         authorization:
@@ -24,7 +28,7 @@ function NaversListWrapper() {
       },
     });
     setNavers(res.data);
-    console.log(res);
+    setIsFetching(false);
   };
 
   useEffect(() => {
@@ -54,7 +58,6 @@ function NaversListWrapper() {
   };
 
   const deleteNaver = async (id) => {
-    console.log(id);
     await axios.delete("https://navedex-api.herokuapp.com/v1/navers/" + id, {
       headers: {
         authorization:
@@ -67,7 +70,6 @@ function NaversListWrapper() {
   };
 
   const toggleModal = (content, id, actionType) => {
-    console.log(content);
     if (content) {
       setModalContent(content);
       setIsShowingModal(true);
@@ -79,7 +81,6 @@ function NaversListWrapper() {
     }
     if (content === "success") {
       setConfirmedAction(actionType);
-      console.log(actionType);
     }
   };
 
@@ -124,15 +125,21 @@ function NaversListWrapper() {
             }`,
           }}
         >
-          {navers.map((naver) => (
-            <NaverItem
-              naver={naver}
-              key={naver.id}
-              toggleModal={toggleModal}
-              getNaver={getNaver}
-              navers={navers}
-            />
-          ))}
+          {isFetching ? (
+            <Spinner />
+          ) : !navers.length ? (
+            <p>Nenhum naver cadastrado.</p>
+          ) : (
+            navers.map((naver) => (
+              <NaverItem
+                naver={naver}
+                key={naver.id}
+                toggleModal={toggleModal}
+                getNaver={getNaver}
+                navers={navers}
+              />
+            ))
+          )}
         </div>
       </div>
       {isShowingModal && (

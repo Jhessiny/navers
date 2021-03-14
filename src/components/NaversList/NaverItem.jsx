@@ -5,7 +5,6 @@ import "./NaverItem.scss";
 function NaverItem({ naver, getNaver, toggleModal, navers }) {
   const [userImage, setUserImage] = useState(naver.url);
   const handleDelete = (id) => {
-    console.log(id);
     toggleModal("deleteNaver", id);
   };
 
