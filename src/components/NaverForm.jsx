@@ -2,7 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NaverForm.scss";
 
-function NaverForm({ title }) {
+const NaverForm = ({
+  title,
+  changeHandler,
+  clickHandler,
+  formData,
+  formType,
+}) => {
   return (
     <div className="form-wrapper">
       <h2>
@@ -14,46 +20,73 @@ function NaverForm({ title }) {
       <form className="naver-form">
         <div className="form-col">
           <div className="input-wrapper">
-            <label htmlFor="">Nome</label>
-            <input type="text" name="" id="" placeholder="Nome" />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="">Data de nascimento</label>
-            <input type="text" name="" id="" placeholder="Data de nascimento" />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="">Projectos que participou</label>
+            <label htmlFor="name">Nome</label>
             <input
               type="text"
-              name=""
+              name="name"
               id=""
+              placeholder="Nome"
+              value={formData.name}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="birthday">Data de nascimento</label>
+            <input
+              type="date"
+              name="birthdate"
+              placeholder="Data de nascimento"
+              value={formData.birhtdate}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="projects">Projetos que participou</label>
+            <input
+              type="text"
+              name="project"
               placeholder="Projectos que participou"
+              value={formData.project}
+              onChange={changeHandler}
             />
           </div>
         </div>
         <div className="form-col">
           <div className="input-wrapper">
             <label htmlFor="">Cargo</label>
-            <input type="text" name="" id="" placeholder="Cargo" />
+            <input
+              type="text"
+              name="job_role"
+              placeholder="Cargo"
+              value={formData.job_role}
+              onChange={changeHandler}
+            />
           </div>
           <div className="input-wrapper">
-            <label htmlFor="">Tempo na empresa</label>
-            <input type="text" name="" id="" placeholder="Tempo na empresa" />
+            <label htmlFor="admission">Tempo na empresa</label>
+            <input
+              type="date"
+              name="admission_date"
+              placeholder="Tempo na empresa"
+              value={formData.admission_date}
+              onChange={changeHandler}
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="">Url da foto do Naver</label>
             <input
               type="text"
-              name=""
-              id=""
+              name="url"
               placeholder="Url da foto do Naver"
+              value={formData.url}
+              onChange={changeHandler}
             />
           </div>
-          <button>Salvar</button>
+          <button onClick={clickHandler}>Salvar</button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default NaverForm;
