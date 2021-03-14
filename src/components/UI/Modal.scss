@@ -10,8 +10,8 @@
   &__card {
     background-color: #fff;
     min-height: 10rem;
-    min-width: 50rem;
-    padding: 1rem;
+    min-width: 55rem;
+    padding: 2.5rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,12 +19,39 @@
     .close {
       float: right;
     }
+    h2,
+    p {
+      margin-bottom: 3rem;
+    }
   }
   &__card-naver {
     min-width: 80rem;
     padding: 0;
     .close {
       margin: 1rem;
+    }
+  }
+  .delete-modal__btns-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4rem;
+    button {
+      background-color: #6600ca;
+      color: #fff;
+      border: none;
+      padding: 1rem 7rem;
+      font-weight: bold;
+      border-radius: 0;
+      margin-left: 2rem;
+    }
+    .btn-border {
+      background: none;
+      color: #444;
+      border: 1px solid #6600ca;
+      &:hover {
+        background-color: #6600ca;
+        color: #fff;
+      }
     }
   }
 }
