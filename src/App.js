@@ -4,6 +4,7 @@ import Home from "./routes/Home";
 import CreateNaver from "./routes/CreateNaver";
 import EditNaver from "./routes/EditNaver";
 import Header from "./components/Header";
+import Login from "./routes/Login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/create-naver" component={CreateNaver} />
           <Route path="/edit-naver" component={EditNaver} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     </BrowserRouter>

@@ -1,0 +1,34 @@
+.login-form {
+  border: 1px solid #444;
+  width: 42rem;
+  padding: 3rem 2.5rem 4rem 2.5rem;
+  font-size: 1.6rem;
+  margin: auto;
+  img {
+    width: 20rem;
+    display: block;
+    margin: 0 auto 3.5rem auto;
+  }
+  .input-wrapper {
+    margin-bottom: 2.5rem;
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.7rem 0.5rem;
+    }
+  }
+  button {
+    background-color: #6600ca;
+    color: #fff;
+    border: none;
+    padding: 1rem 7rem;
+    font-weight: bold;
+    border-radius: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+}

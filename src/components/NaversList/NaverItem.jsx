@@ -2,13 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NaverItem.scss";
 
-function NaverItem({ naver, getNaver, toggleModal }) {
+function NaverItem({ naver, getNaver, toggleModal, navers }) {
   const handleDelete = (id) => {
     console.log(id);
     toggleModal("deleteNaver", id);
   };
   return (
-    <div className="naver-item">
+    <div
+      className="naver-item"
+      style={{
+        marginRight: `${navers.length % 4 !== 0 ? "2rem" : 0}`,
+      }}
+    >
       <Link
         to={"/" + naver.id}
         onClick={(e) => {

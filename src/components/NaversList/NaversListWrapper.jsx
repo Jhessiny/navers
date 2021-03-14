@@ -115,13 +115,21 @@ function NaversListWrapper() {
           <h1>Navers</h1>
           <Link to="/create-naver">Adicionar Naver</Link>
         </div>
-        <div className="navers-list-wrapper__list">
+        <div
+          className="navers-list-wrapper__list"
+          style={{
+            justifyContent: `${
+              navers.length % 4 !== 0 ? "flex-start" : "space-between"
+            }`,
+          }}
+        >
           {navers.map((naver) => (
             <NaverItem
               naver={naver}
               key={naver.id}
               toggleModal={toggleModal}
               getNaver={getNaver}
+              navers={navers}
             />
           ))}
         </div>

@@ -1,7 +1,9 @@
 .navers-list-wrapper {
+  font-size: 1.6rem;
   &__top {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 4rem;
     margin-bottom: 2rem;
 
@@ -9,11 +11,11 @@
       font-size: 4rem;
       color: #6600ca;
     }
-    button {
+    a {
       background-color: #6600ca;
       color: #fff;
       border: none;
-      padding: 0.5rem 3rem;
+      padding: 1rem 3rem;
       font-weight: bold;
       border-radius: 0;
     }
