@@ -6,6 +6,7 @@ import Modal from "../UI/Modal";
 import NaverModalContent from "../ModalContents/NaverModalContent";
 import SuccessModalContent from "../ModalContents/SuccessModalContent";
 import DeletingModalContent from "../ModalContents/DeletingModalContent";
+import { Link } from "react-router-dom";
 
 function NaversListWrapper() {
   const [navers, setNavers] = useState([]);
@@ -112,7 +113,7 @@ function NaversListWrapper() {
       <div className="navers-list-wrapper">
         <div className="navers-list-wrapper__top">
           <h1>Navers</h1>
-          <button>Adicionar Naver</button>
+          <Link to="/create-naver">Adicionar Naver</Link>
         </div>
         <div className="navers-list-wrapper__list">
           {navers.map((naver) => (
