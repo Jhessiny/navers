@@ -10,6 +10,7 @@ import { Redirect } from "react-router";
 const EditNaver = ({ match, history }) => {
   const [userId, setUserId] = useState(null);
   const [isShowingModal, setIsShowingModal] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [editFormData, setEditForm] = useState({
     name: "",
     admission_date: "",
@@ -26,6 +27,7 @@ const EditNaver = ({ match, history }) => {
   }
 
   const getUser = async (id) => {
+    setIsFetching(true);
     const res = await axios.get(
       "https://navedex-api.herokuapp.com/v1/navers/" + id,
       {
@@ -44,6 +46,7 @@ const EditNaver = ({ match, history }) => {
       birthdate: birthdate,
       url: res.data.url,
     });
+    setIsFetching(false);
   };
 
   useEffect(() => {
@@ -52,33 +55,27 @@ const EditNaver = ({ match, history }) => {
     setUserId(id);
   }, [match]);
 
-  const changeInput = (e) => {
-    let inputValue = e.target.value;
-    let inputName = e.target.name;
-    setEditForm((prevState) => {
-      return { ...prevState, [inputName]: inputValue };
-    });
-  };
+  // const changeInput = (e) => {
+  //   let inputValue = e.target.value;
+  //   let inputName = e.target.name;
+  //   console.log(inputName, inputValue);
+  //   setEditForm((prevState) => {
+  //     return { ...prevState, [inputName]: inputValue };
+  //   });
+  // };
 
-  const saveChanges = (e) => {
-    e.preventDefault();
-    console.log("sending");
-    editFormData.admission_date = formatDate(
-      editFormData.admission_date,
-      "sending"
-    );
-    editFormData.birthdate = formatDate(editFormData.birthdate, "sending");
+  const saveChanges = (values) => {
+    console.log(values.birthdate);
+    setEditForm(values);
+    values.admission_date = formatDate(values.admission_date, "sending");
+    values.birthdate = formatDate(values.birthdate, "sending");
     axios
-      .put(
-        "https://navedex-api.herokuapp.com/v1/navers/" + userId,
-        editFormData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: "Bearer " + loggedToken,
-          },
-        }
-      )
+      .put("https://navedex-api.herokuapp.com/v1/navers/" + userId, values, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + loggedToken,
+        },
+      })
       .then(() => {
         toggleModal();
         setTimeout(() => history.push("/"), 1000);
@@ -94,10 +91,10 @@ const EditNaver = ({ match, history }) => {
       {redirect}
       <NaverForm
         title="Editar Naver"
-        changeHandler={(e) => changeInput(e)}
         submitHandler={saveChanges}
         formData={editFormData}
-        formType={"new"}
+        // changeInput={changeInput}
+        isFetching={isFetching}
       />
       {isShowingModal && (
         <Modal toggleModal={toggleModal} modalContent="" currentNaver="">

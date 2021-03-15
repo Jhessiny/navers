@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -26,6 +26,10 @@ const NaverForm = ({ title, submitHandler, formData }) => {
       .required("Campo não pode estar vazio."),
   });
 
+  useEffect(() => {
+    console.log("formData", formData);
+  }, [formData]);
+
   return (
     <div className="form-wrapper">
       <h2>
@@ -35,9 +39,10 @@ const NaverForm = ({ title, submitHandler, formData }) => {
         {title}
       </h2>
       <Formik
-        initialValues={formData}
+        initialValues={{ name: formData.name, ...formData }}
         onSubmit={submitHandler}
         validationSchema={formSchema}
+        enableReinitialize={true}
       >
         <Form className="naver-form">
           <div className="form-col">

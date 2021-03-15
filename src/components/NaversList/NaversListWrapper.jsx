@@ -111,24 +111,28 @@ function NaversListWrapper() {
           <h1>Navers</h1>
           <Link to="/create-naver">Adicionar Naver</Link>
         </div>
-        <div className="navers-list-wrapper__list">
-          {isFetching ? (
-            <Spinner />
-          ) : !navers.length ? (
-            <p>Nenhum naver cadastrado.</p>
-          ) : (
-            navers.map((naver) => (
-              <NaverItem
-                naver={naver}
-                key={naver.id}
-                toggleModal={toggleModal}
-                getNaver={getNaver}
-                navers={navers}
-              />
-            ))
-          )}
-          <div className="naver-item spare-box"></div>
-        </div>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          <div className="navers-list-wrapper__list">
+            {!navers.length ? (
+              <p>Nenhum naver cadastrado.</p>
+            ) : (
+              <>
+                {navers.map((naver) => (
+                  <NaverItem
+                    naver={naver}
+                    key={naver.id}
+                    toggleModal={toggleModal}
+                    getNaver={getNaver}
+                    navers={navers}
+                  />
+                ))}
+                <div className="naver-item spare-box"></div>
+              </>
+            )}
+          </div>
+        )}
       </div>
       {isShowingModal && (
         <Modal

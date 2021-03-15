@@ -4,13 +4,13 @@ export const formatDate = (dateInput, formatFor) => {
   if (dateMonth < 10) {
     dateMonth = "0" + dateMonth;
   }
+  let dateDay = date.getDate() + 1;
+  if (dateDay < 10) {
+    dateDay = "0" + dateDay;
+  }
   if (formatFor === "sending") {
-    return date.getDate() + "/" + dateMonth + "/" + date.getFullYear();
+    return dateDay + "/" + dateMonth + "/" + date.getFullYear();
   } else if (formatFor === "geting") {
-    console.log(
-      "geting",
-      date.getFullYear() + "-" + dateMonth + "-" + date.getDate()
-    );
-    return date.getFullYear() + "-" + dateMonth + "-" + date.getDate();
+    return date.getFullYear() + "-" + dateMonth + "-" + dateDay;
   }
 };

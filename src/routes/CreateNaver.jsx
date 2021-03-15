@@ -59,7 +59,6 @@ function CreateNaver(props) {
       {redirect}
       <NaverForm
         title="Adicionar Naver"
-        changeHandler={(e) => changeInput(e)}
         submitHandler={addUser}
         formData={addUserForm}
         formType={"new"}

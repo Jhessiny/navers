@@ -3,6 +3,17 @@ import "./NaverModalContent.scss";
 
 function NaverModalContent({ currentNaver, toggleModal }) {
   const [userImage, setUserImage] = useState(currentNaver.url);
+
+  const calcPeriod = (begin) => {
+    let dateStart = new Date(begin);
+    let currentDate = new Date();
+    return (
+      Math.ceil(
+        Math.abs(dateStart.getTime() - currentDate.getTime()) /
+          (1000 * 3600 * 24)
+      ) / 365.25
+    );
+  };
   return (
     <div className="modal__card modal__card-naver">
       <i className="close fas fa-times" onClick={() => toggleModal()}></i>
@@ -19,15 +30,15 @@ function NaverModalContent({ currentNaver, toggleModal }) {
           </div>
           <div className="navers-modal-content__right__item">
             <h3>Idade</h3>
-            <p>Lorem ipsum</p>
+            <p>{Math.floor(calcPeriod(currentNaver.birthdate))} anos.</p>
           </div>
           <div className="navers-modal-content__right__item">
             <h3>Tempo de empresa</h3>
-            <p>Lorem ipsum</p>
+            <p>{calcPeriod(currentNaver.admission_date).toFixed(1)} ano(s)</p>
           </div>
           <div className="navers-modal-content__right__item">
             <h3>Projetos que participou</h3>
-            <p>Lorem ipsum</p>
+            <p>{currentNaver.project}</p>
           </div>
           <div className="navers-modal-content__right__btns-wrapper-naver">
             <button
