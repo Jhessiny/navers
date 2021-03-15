@@ -85,8 +85,6 @@ function NaversListWrapper() {
       <NaverModalContent
         currentNaver={currentNaver}
         toggleModal={toggleModal}
-        // deleteNaver={deleteNaver}
-        // deletingUserId={deletingUserId}
       />
     );
   } else if (modalContent === "deleteNaver") {

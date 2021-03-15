@@ -33,16 +33,12 @@ function CreateNaver(props) {
     });
   };
 
-  const addUser = (e) => {
-    e.preventDefault();
-    addUserForm.admission_date = formatDate(
-      addUserForm.admission_date,
-      "sending"
-    );
-    addUserForm.birthdate = formatDate(addUserForm.birthdate, "sending");
-    console.log(addUserForm);
+  const addUser = (values) => {
+    setAddUserForm(values);
+    values.admission_date = formatDate(values.admission_date, "sending");
+    values.birthdate = formatDate(values.birthdate, "sending");
     axios
-      .post("https://navedex-api.herokuapp.com/v1/navers", addUserForm, {
+      .post("https://navedex-api.herokuapp.com/v1/navers", values, {
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + loggedToken,
@@ -64,7 +60,7 @@ function CreateNaver(props) {
       <NaverForm
         title="Adicionar Naver"
         changeHandler={(e) => changeInput(e)}
-        clickHandler={addUser}
+        submitHandler={addUser}
         formData={addUserForm}
         formType={"new"}
       />
