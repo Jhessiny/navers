@@ -1,6 +1,7 @@
 .naver-item {
   font-size: 1.6rem;
   width: 300px;
+  margin-bottom: 2rem;
   &__img {
     width: 100%;
   }
@@ -24,5 +25,29 @@
 @media (max-width: 1300px) {
   .naver-item {
     width: 280px;
+  }
+}
+
+@media (max-width: 945px) {
+  .naver-item {
+    width: 250px;
+  }
+}
+
+@media (max-width: 830px) {
+  .naver-item {
+    width: 220px;
+  }
+}
+
+@media (max-width: 750px) {
+  .naver-item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 550px) {
+  .naver-item {
+    width: 100%;
   }
 }

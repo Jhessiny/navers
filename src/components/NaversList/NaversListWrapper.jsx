@@ -85,8 +85,8 @@ function NaversListWrapper() {
       <NaverModalContent
         currentNaver={currentNaver}
         toggleModal={toggleModal}
-        deleteNaver={deleteNaver}
-        deletingUserId={deletingUserId}
+        // deleteNaver={deleteNaver}
+        // deletingUserId={deletingUserId}
       />
     );
   } else if (modalContent === "deleteNaver") {
@@ -113,14 +113,7 @@ function NaversListWrapper() {
           <h1>Navers</h1>
           <Link to="/create-naver">Adicionar Naver</Link>
         </div>
-        <div
-          className="navers-list-wrapper__list"
-          style={{
-            justifyContent: `${
-              navers.length % 4 !== 0 ? "flex-start" : "space-between"
-            }`,
-          }}
-        >
+        <div className="navers-list-wrapper__list">
           {isFetching ? (
             <Spinner />
           ) : !navers.length ? (
@@ -136,6 +129,7 @@ function NaversListWrapper() {
               />
             ))
           )}
+          <div className="naver-item spare-box"></div>
         </div>
       </div>
       {isShowingModal && (

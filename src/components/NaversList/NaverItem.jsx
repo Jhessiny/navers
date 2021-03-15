@@ -9,12 +9,7 @@ function NaverItem({ naver, getNaver, toggleModal, navers }) {
   };
 
   return (
-    <div
-      className="naver-item"
-      style={{
-        marginRight: `${navers.length % 4 !== 0 ? "2rem" : 0}`,
-      }}
-    >
+    <div className="naver-item">
       <Link
         to={"/" + naver.id}
         onClick={(e) => {

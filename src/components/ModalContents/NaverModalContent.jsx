@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NaverModalContent.scss";
 
-function NaverModalContent({
-  currentNaver,
-  toggleModal,
-  deleteNaver,
-  deletingUserId,
-}) {
+function NaverModalContent({ currentNaver, toggleModal }) {
+  const [userImage, setUserImage] = useState(currentNaver.url);
   return (
     <div className="modal__card modal__card-naver">
-      <i className="close fas fa-times" onClick={toggleModal}></i>
+      <i className="close fas fa-times" onClick={() => toggleModal()}></i>
       <div className="navers-modal-content">
-        <img src={currentNaver.url} alt="" />
+        <img
+          src={userImage}
+          alt=""
+          onError={() => setUserImage("assets/images/naver.jpg")}
+        />
         <div className="navers-modal-content__right">
           <div className="navers-modal-content__right__item">
             <h2>{currentNaver.name}</h2>
@@ -29,10 +29,10 @@ function NaverModalContent({
             <h3>Projetos que participou</h3>
             <p>Lorem ipsum</p>
           </div>
-          <div className="navers-modal-content__right__btns-wrapper">
+          <div className="navers-modal-content__right__btns-wrapper-naver">
             <button
               className="btn btn-delete"
-              onClick={() => deleteNaver(currentNaver.id)}
+              onClick={() => toggleModal("deleteNaver", currentNaver.id)}
             >
               <i className="fas fa-trash"></i>
             </button>

@@ -7,7 +7,7 @@ function Header() {
   const [loggedToken, setLoggedToken] = useContext(UserContext);
 
   const logout = () => {
-    sessionStorage.setItem("currentToken", "");
+    localStorage.setItem("currentToken", "");
     setLoggedToken(null);
   };
 

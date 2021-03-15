@@ -17,7 +17,7 @@ function Login() {
       body
     );
     const token = res.data.token;
-    sessionStorage.setItem("currentToken", token);
+    localStorage.setItem("currentToken", token);
     setLoggedToken(token);
   };
 

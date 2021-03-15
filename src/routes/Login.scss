@@ -32,3 +32,24 @@
     width: 100%;
   }
 }
+
+@media (max-width: 470px) {
+  .login-form {
+    width: 35rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .login-form {
+    width: 30rem;
+    padding: 3rem 1.5rem 4rem 1.5rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .login-form {
+    width: 100%;
+    border: none;
+    padding: 0;
+  }
+}

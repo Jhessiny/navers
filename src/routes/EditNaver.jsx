@@ -24,7 +24,7 @@ const EditNaver = ({ match, history }) => {
   if (!loggedToken) {
     redirect = <Redirect to="/login" />;
   }
-
+     
   const getUser = async (id) => {
     const res = await axios.get(
       "https://navedex-api.herokuapp.com/v1/navers/" + id,
